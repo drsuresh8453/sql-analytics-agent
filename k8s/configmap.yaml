@@ -7,7 +7,7 @@ data:
   AWS_REGION: "eu-north-1"
   RDS_PORT: "5432"
   RDS_DB: "supportagent"
-  RDS_USER: "sql_agent_readonly"
+  RDS_USER: "SupportAgent2026"
   REDIS_HOST: "redis-service"
   REDIS_PORT: "6379"
   REDIS_DB: "0"

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: sql-agent
-          image: YOUR_ECR_REGISTRY/sql-analytics-agent:latest
+          image: 668449743598.dkr.ecr.eu-north-1.amazonaws.com/sql-analytics-agent:latest
           ports:
             - containerPort: 8000
             - containerPort: 8501
