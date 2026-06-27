@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-agent
+  namespace: sql-analytics-agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sql-agent
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sql-agent
+    spec:
+      containers:
+        - name: sql-agent
+          image: YOUR_ECR_REGISTRY/sql-analytics-agent:latest
+          ports:
+            - containerPort: 8000
+            - containerPort: 8501
+          envFrom:
+            - configMapRef:
+                name: sql-agent-config
+            - secretRef:
+                name: sql-agent-secrets
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"

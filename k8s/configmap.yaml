@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-agent-config
+  namespace: sql-analytics-agent
+data:
+  AWS_REGION: "eu-north-1"
+  RDS_PORT: "5432"
+  RDS_DB: "supportagent"
+  RDS_USER: "sql_agent_readonly"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+  CACHE_ENABLED: "true"
+  CACHE_TTL_QUERY_SECONDS: "600"
+  CACHE_TTL_SCHEMA_SECONDS: "3600"
+  RATE_LIMIT_PER_MINUTE: "30"
+  INVESTIGATIVE_CALL_LIMIT_PER_SESSION: "30"
+  INVESTIGATIVE_CALL_WINDOW_SECONDS: "300"
+  LANGCHAIN_TRACING_V2: "true"
+  LANGCHAIN_PROJECT: "sql-analytics-agent"
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"

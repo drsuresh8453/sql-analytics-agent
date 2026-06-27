@@ -1,0 +1,26 @@
+# docker-compose.yml
+# Author: Suresh D R | AI Product Developer & Technology Mentor
+
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: sql-agent-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  app:
+    build: ./backend
+    container_name: sql-agent-app
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    restart: unless-stopped
